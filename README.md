@@ -1,6 +1,4 @@
 # Cloner le dépôt
-git clone <repository_url>
-cd <repository_name>
 
 # Créer un environnement virtuel
 python3 -m venv venv
