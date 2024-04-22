@@ -1,0 +1,41 @@
+<div
+	class="modal fade"
+	id="{{ employee.id }}"
+	tabindex="-1"
+	aria-labelledby="employee_delete_modal_label"
+	aria-hidden="true"
+>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1
+					class="modal-title fs-5"
+					id="employee_delete_modal_label"
+				>
+					Supprimer "{{ employee.lastname }}"
+				</h1>
+				<button
+					type="button"
+					class="btn-close"
+					data-bs-dismiss="modal"
+					aria-label="Close"
+				></button>
+			</div>
+			<div class="modal-footer">
+				<a
+					class="btn btn-danger"
+					href="{{ url_for('employee_bp.employee_delete', id=employee.id) }}"
+					role="button"
+					>Supprimer</a
+				>
+				<button
+					type="button"
+					class="btn btn-secondary"
+					data-bs-dismiss="modal"
+				>
+					Fermer
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

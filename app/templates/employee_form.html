@@ -1,0 +1,181 @@
+<form method="post">
+	<div class="row row-cols-1 row-cols-md-2 g-3">
+		<div class="col">
+			<div class="form-floating">
+				<input
+					type="text"
+					class="form-control shadow-none"
+					id="firstname"
+					placeholder="Nom"
+					name="firstname"
+					maxlength="32"
+					value="{% if employee %}{{ employee.firstname }}{% endif %}"
+				/>
+				<label for="firstname">Nom</label>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-floating">
+				<input
+					type="text"
+					class="form-control shadow-none"
+					id="lastname"
+					placeholder="Prénom"
+					name="lastname"
+					maxlength="32"
+					value="{% if employee %}{{ employee.lastname }}{% endif %}"
+				/>
+				<label for="lastname">Prénom</label>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-floating">
+				<select
+					class="form-select"
+					id="gender"
+					name="gender"
+					aria-label="Floating label select example"
+				>
+					{% if employee %}
+					{% if employee.gender == "M" %}
+					<option value="M" selected>Masculin</option>
+					<option value="F">Feminin</option>
+					{% else %}
+					<option value="M">Masculin</option>
+					<option value="F" selected>Feminin</option>
+					{% endif %}
+					{% else %}
+					<option value="M">Masculin</option>
+					<option value="F">Feminin</option>
+					{% endif %}
+				</select>
+				<label for="gender">Genre</label>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-floating">
+				<input
+					type="date"
+					class="form-control shadow-none"
+					id="date_of_birth"
+					placeholder="Date de naissance"
+					name="date_of_birth"
+					maxlength="32"
+					value="{% if employee %}{{ employee.date_of_birth }}{% endif %}"
+				/>
+				<label for="date_of_birth">Date de naissance</label>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-floating">
+				<input
+					type="text"
+					class="form-control shadow-none"
+					id="phone_number"
+					placeholder="Téléphone"
+					name="phone_number"
+					maxlength="100"
+					value="{% if employee %}{{ employee.phone_number }}{% endif %}"
+				/>
+				<label for="phone_number">Téléphone</label>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-floating">
+				<input
+					type="email"
+					class="form-control shadow-none"
+					id="email"
+					placeholder="Email"
+					name="email"
+					maxlength="100"
+					value="{% if employee %}{{ employee.email }}{% endif %}"
+				/>
+				<label for="email">Email</label>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-floating">
+				<input
+					type="text"
+					class="form-control shadow-none"
+					id="address"
+					placeholder="Adresse"
+					name="address"
+					maxlength="100"
+					value="{% if employee %}{{ employee.address }}{% endif %}"
+				/>
+				<label for="address">Adresse</label>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-floating">
+				<input
+					type="text"
+					class="form-control shadow-none"
+					id="position"
+					placeholder="Position"
+					name="position"
+					maxlength="100"
+					value="{% if employee %}{{ employee.position }}{% endif %}"
+				/>
+				<label for="position">Position</label>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-floating">
+				<input
+					type="text"
+					class="form-control shadow-none"
+					id="department"
+					placeholder="Departement"
+					name="department"
+					maxlength="100"
+					value="{% if employee %}{{ employee.department }}{% endif %}"
+				/>
+				<label for="department">Departement</label>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-floating">
+				<input
+					type="number"
+					class="form-control shadow-none"
+					id="salary"
+					placeholder="Salaire"
+					name="salary"
+					value="{% if employee %}{{ employee.salary }}{% endif %}"
+				/>
+				<label for="salary">Salaire</label>
+			</div>
+		</div>
+		<div class="col">
+			<div class="row row-cols-2 g-3">
+				<div class="col">
+					<input
+						type="checkbox"
+						class="btn-check"
+						id="is_active"
+						name="is_active"
+						autocomplete="off"
+						{% if employee and employee.is_active %}checked{% endif %}
+					/>
+					<label
+						class="btn btn-outline-primary btn-lg w-100"
+						for="is_active"
+						>Active</label
+					><br />
+				</div>
+				<div class="col">
+					<button
+						class="btn btn-primary btn-lg w-100 shadow-none"
+						type="submit"
+					>
+						Enregistrer
+					</button>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</form>

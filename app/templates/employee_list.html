@@ -1,0 +1,193 @@
+{% extends 'base.html' %} {% block content %} {% include "navbar.html" %}
+<div class="container">
+	<div class="row row-cols-1 py-3 g-3">
+		<div class="col col-md-6 col-lg-4">
+			<div class="hstack gap-3">
+				<a
+					class="btn btn-outline-secondary btn-lg"
+					href="{{ url_for('employee_bp.employee_create') }}"
+					><i class="fa-solid fa-plus fa-xl"></i
+				></a>
+				<form method="get">
+					<div class="input-group input-group-lg">
+						<input
+							type="text"
+							class="form-control border-secondary border-end-0 shadow-none"
+							id="search"
+							placeholder="Recherche"
+							name="search"
+							aria-label="Recipient's username"
+							aria-describedby="search-button"
+						/>
+						<button
+							class="btn btn-outline-secondary border-start-0 border-start-0 shadow-none"
+							type="submit"
+							id="search-button"
+						>
+							<i class="fa-solid fa-magnifying-glass"></i>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="col">
+			<div class="row row-cols-1 g-3">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">
+									Nom {% if 'firstname_asc' in request.url %}
+									<a class="stretched-link"
+										href="{{ url_for('employee_bp.employee_list', order_by='firstname_desc') }}"
+										><i class="fa-solid fa-caret-down"></i
+									></a>
+									{% else %}
+									<a
+										href="{{ url_for('employee_bp.employee_list', order_by='firstname_asc') }}"
+										><i class="fa-solid fa-caret-up"></i
+									></a>
+									{% endif %}
+								</th>
+								<th scope="col">
+									Prénom {% if 'lastname_asc' in request.url
+									%}
+									<a
+										href="{{ url_for('employee_bp.employee_list', order_by='lastname_desc') }}"
+										><i class="fa-solid fa-caret-down"></i
+									></a>
+									{% else %}
+									<a
+										href="{{ url_for('employee_bp.employee_list', order_by='lastname_asc') }}"
+										><i class="fa-solid fa-caret-up"></i
+									></a>
+									{% endif %}
+								</th>
+								<th scope="col">Genre</th>
+								<th scope="col">Date de naissance</th>
+								<th scope="col">Date d'embauche</th>
+								<th scope="col">Téléphone</th>
+								<th scope="col">Email</th>
+								<th scope="col">
+									Adresse {% if 'address_asc' in request.url %}
+									<a
+										href="{{ url_for('employee_bp.employee_list', order_by='address_desc') }}"
+										><i class="fa-solid fa-caret-down"></i
+									></a>
+									{% else %}
+									<a
+										href="{{ url_for('employee_bp.employee_list', order_by='address_asc') }}"
+										><i class="fa-solid fa-caret-up"></i
+									></a>
+									{% endif %}
+								</th>
+								<th scope="col">
+									Position {% if 'position_asc' in request.url %}
+									<a
+										href="{{ url_for('employee_bp.employee_list', order_by='position_desc') }}"
+										><i class="fa-solid fa-caret-down"></i
+									></a>
+									{% else %}
+									<a
+										href="{{ url_for('employee_bp.employee_list', order_by='position_asc') }}"
+										><i class="fa-solid fa-caret-up"></i
+									></a>
+									{% endif %}
+								</th>
+								<th scope="col">
+									Departement {% if 'department_asc' in request.url %}
+									<a
+										href="{{ url_for('employee_bp.employee_list', order_by='department_desc') }}"
+										><i class="fa-solid fa-caret-down"></i
+									></a>
+									{% else %}
+									<a
+										href="{{ url_for('employee_bp.employee_list', order_by='department_asc') }}"
+										><i class="fa-solid fa-caret-up"></i
+									></a>
+									{% endif %}
+								</th>
+								<th scope="col">
+									Salaire {% if 'salary_asc' in request.url %}
+									<a
+										href="{{ url_for('employee_bp.employee_list', order_by='salary_desc') }}"
+										><i class="fa-solid fa-caret-down"></i
+									></a>
+									{% else %}
+									<a
+										href="{{ url_for('employee_bp.employee_list', order_by='salary_asc') }}"
+										><i class="fa-solid fa-caret-up"></i
+									></a>
+									{% endif %}
+								</th>
+								<th scope="col">
+									Status {% if 'status_asc' in request.url %}
+									<a
+										href="{{ url_for('employee_bp.employee_list', order_by='status_desc') }}"
+										><i class="fa-solid fa-caret-down"></i
+									></a>
+									{% else %}
+									<a
+										href="{{ url_for('employee_bp.employee_list', order_by='status_asc') }}"
+										><i class="fa-solid fa-caret-up"></i
+									></a>
+									{% endif %}
+								</th>
+								<th scope="col">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for employee in employees %}
+							<tr>
+								<th scope="row">{{ loop.index }}</th>
+								<td>{{ employee.lastname }}</td>
+								<td>{{ employee.firstname }}</td>
+								<td>{{ employee.gender }}</td>
+								<td>{{ employee.date_of_birth }}</td>
+								<td>{{ employee.created_at }}</td>
+								<td>{{ employee.phone_number }}</td>
+								<td>{{ employee.email }}</td>
+								<td>{{ employee.address }}</td>
+								<td>{{ employee.position }}</td>
+								<td>{{ employee.department }}</td>
+								<td>{{ employee.salary }}</td>
+								<td>
+									{% if employee.is_active %}<i
+										class="fa-solid fa-circle-check text-success"
+									></i
+									>{% else %}<i
+										class="fa-solid fa-circle-xmark text-danger"
+									></i
+									>{% endif %}
+								</td>
+								<td>
+									<div class="hstack gap-3">
+										<a
+											class=""
+											href="{{ url_for('employee_bp.employee_update', id=employee.id) }}"
+											><i
+												class="fa-solid fa-pen-to-square fa-sm"
+												style="color: #007bff"
+												role="button"
+											></i
+										></a>
+										<i
+											class="fa-solid fa-trash fa-sm"
+											style="color: #ff0000"
+											role="button"
+											data-bs-toggle="modal"
+											data-bs-target="#{{ employee.id }}"
+										></i>
+									</div>
+								</td>
+							</tr>
+							{% include "employee_delete.html" %} {% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

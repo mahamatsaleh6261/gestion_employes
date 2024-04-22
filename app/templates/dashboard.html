@@ -1,0 +1,122 @@
+{% extends 'base.html' %} {% block content %} {% include "navbar.html" %}
+<div class="container">
+	<div class="row row-cols-1 row-cols-md-2 g-5 py-3">
+		<div class="col">
+			<table
+				class="charts-css column show-heading show-labels show-primary-axis show-10-secondary-axes"
+			>
+				<caption>
+					<strong> Employés par departement </strong>
+				</caption>
+				<thead>
+					<tr>
+						<th scope="col">Departement</th>
+						<th scope="col">Nombre employes</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{% for group in employees|groupby("department") %}
+					<tr>
+						<th scope="row">{{ group.grouper }}</th>
+						<td
+							style="--size: {{ group.list|count/employees|count }}"
+						>
+							<span class="data"> {{ group.list|count }} </span>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="col">
+			<table
+				class="charts-css column show-heading show-labels show-primary-axis show-10-secondary-axes"
+			>
+				<caption>
+					<strong> Employés par position </strong>
+				</caption>
+				<thead>
+					<tr>
+						<th scope="col">Position</th>
+						<th scope="col">Nombre employes</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{% for group in employees|groupby("position") %}
+					<tr>
+						<th scope="row">{{ group.grouper }}</th>
+						<td
+							style="--size: {{ group.list|count/employees|count }}"
+						>
+							<span class="data"> {{ group.list|count }} </span>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="col">
+			<table
+				class="charts-css column show-heading show-labels show-primary-axis show-10-secondary-axes"
+			>
+				<caption>
+					<strong> Employés par salaire </strong>
+				</caption>
+				<thead>
+					<tr>
+						<th scope="col">Salaire</th>
+						<th scope="col">Nombre employes</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{% for group in employees|groupby("salary") %}
+					<tr>
+						<th scope="row">{{ group.grouper / 1000  }}</th>
+						<td
+							style="--size: {{ group.list|count/employees|count }}"
+						>
+							<span class="data"> {{ group.list|count }} </span>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="col">
+			<div
+				class="d-flex"
+				id="pie-example-1"
+			>
+				<table class="charts-css pie hide-data show-labels">
+					<caption>
+						Pie Example #1
+					</caption>
+					<tbody>
+						<tr>
+							<td
+								style="--start: 0; --end: {{ employees|selectattr('is_active')|list|count }} / {{ employees|count }}"
+							>
+								<span class="data"> $ 10K </span>
+							</td>
+						</tr>
+						<tr>
+							<td
+								style="--start: {{ employees|selectattr('is_active')|list|count }} / {{ employees|count }}; --end: 1"
+							>
+								<span class="data"> $ 5K </span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<ul class="charts-css legend legend-square" style="flex-shrink: 3;">
+					<li>Active</li>
+					<li>Inactive</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

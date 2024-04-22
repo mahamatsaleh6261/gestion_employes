@@ -1,0 +1,44 @@
+<nav
+	class="navbar navbar-dark navbar-expand-md bg-body-tertiary"
+	data-bs-theme="dark"
+>
+	<div class="container">
+		<a
+			class="navbar-brand"
+			href="#"
+			>Gestion</a
+		>
+		<button
+			class="navbar-toggler shadow-none p-0 border-0"
+			type="button"
+			data-bs-toggle="collapse"
+			data-bs-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+		>
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div
+			class="collapse navbar-collapse"
+			id="navbarSupportedContent"
+		>
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a
+						class="nav-link {% if request.path == url_for('main_bp.dashboard') %}active{% endif %}"
+						href="{{ url_for('main_bp.dashboard') }}"
+						>Accueil</a
+					>
+				</li>
+				<li class="nav-item">
+					<a
+						class="nav-link {% if 'employees' in request.path %}active{% endif %}"
+						href="{{ url_for('employee_bp.employee_list') }}"
+						>Employés</a
+					>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
